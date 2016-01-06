@@ -45,6 +45,8 @@ and then open [http://localhost:9000/weather.php](http://localhost:9000/weather.
 
 If you get that working, allow the client to use a query string parameter to name the city and country.
 
+Or use PHP to get the IP Address of the client, and call the [IP location API](http://ip-api.com/docs/api:json) to get the location information for that IP address. Then you can call the Open Weather API for that location, returning the current weather for wherever the client happens to be (or at least where the source IP was--if they go through a proxy or VPN server, that's the IP your server will get) 
+
 ## Keep Going
 
 If you get through all of these, keep thinking of other little challenges you can do, or explore some more of the [built-in functions](http://php.net/manual/en/funcref.php).
