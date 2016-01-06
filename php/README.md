@@ -12,7 +12,7 @@ In a new PHP script named `warmup.php`:
 - declare a variable and initialize it to a random integer between 1 and 100
 - echo that value, embedding it in the message "your new random value is nnn", using an interpolated string. For example, if the new random number was 50, your message should say "your new random value is 50". You should also embed a newline character so that the next prompt appears on the next line in the terminal.
 
-To figure out how to generate a random integer, search for "php random integer" and read what you find.
+To figure out how to generate a random integer, search for "php random integer" and read what you find.1
 
 run your page by executing this in the terminal:
 ```bash
