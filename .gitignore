@@ -1,3 +1,3 @@
-**/secret/*
-!**/secret/*.md
-!**/secret/*.template
+node_modules
+.idea
+.DS_Store
