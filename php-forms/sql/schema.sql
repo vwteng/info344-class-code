@@ -1,7 +1,9 @@
+-- download zip CSV file from http://www.unitedstateszipcodes.org/zip-code-database/
+
 drop table if exists zips;
 
 create table zips (
-	zip varchar(10) not null primary key,
+    zip varchar(10) not null primary key,
     type varchar(64),    
     primary_city varchar(128),
     acceptable_cities text,
@@ -17,6 +19,6 @@ create table zips (
     decommissioned bool,
     estimated_population int,
     notes text,
-    
+
     index (primary_city)
 );
