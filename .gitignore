@@ -1,3 +1,6 @@
 node_modules
 .idea
 .DS_Store
+**/secret/*
+!**/secret/*.template
+!**/secret/*.md
