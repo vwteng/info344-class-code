@@ -30,5 +30,10 @@ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
+# install the kerberos library
+# which is needed to build the MongoDB
+# Node.js driver during npm install
+sudo apt-get install -y libkrb5-dev
+
 # install pm2 utility for managing node servers
 sudo npm install -g pm2 --loglevel error
