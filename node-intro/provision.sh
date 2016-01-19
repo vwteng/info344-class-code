@@ -12,7 +12,7 @@ sudo -E apt-get update
 # install git
 sudo -E apt-get install -y git
 
-# install Node.js v5.x
+# install Node.js v4.x
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo -E apt-get install -y nodejs
 
@@ -50,3 +50,8 @@ sudo -E apt-get install -y libkrb5-dev
 
 # install pm2 utility for managing node servers
 sudo -E npm install -g pm2 --loglevel error
+
+# install the tsd utility for installing
+# Visual Studio Code typings files
+# gives statement completion and parameter hinting
+sudo -E npm install -g tsd --loglevel error
