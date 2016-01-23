@@ -11,6 +11,10 @@ rm /etc/apt/apt.conf.d/70debconf
 # update the package index 
 apt-get update
 
+# install software-properties-common
+# (gets us add-apt-repository command)
+apt-get install -y software-properties-common
+
 # install Node.js v5.x
 curl -sL https://deb.nodesource.com/setup_5.x | bash -
 apt-get install -y nodejs
@@ -22,18 +26,11 @@ apt-get install -y build-essential
 apt-get install -y chase libcap2-bin
 setcap cap_net_bind_service=+ep $(chase $(which node))
 
-# install MySQL
-apt-get install -y mysql-server
-
-# run the SQL commands from the mysql_secure_installation script
-# except for setting the root password (so that we don't embed
-# the root password in our provisioning script)
-mysql -u root <<-EOF
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';
-FLUSH PRIVILEGES;
-EOF
+# install MariaDB 10.1
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+add-apt-repository 'deb [arch=amd64,i386] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
+apt-get update
+apt-get install -y mariadb-server
 
 # install MongoDB and tools
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -42,18 +39,12 @@ apt-get update
 apt-get install -y mongodb-org
 
 # install recent version of redis
-apt-get install -y software-properties-common
 add-apt-repository -y ppa:rwky/redis
 apt-get update
 apt-get install -y redis-server
 
 # set the loglevel for npm to show errors only
 npm config set loglevel error
-
-# set the bin-links option to false so that
-# Windows users don't get errors when intsalling
-# node modules via NPM
-npm config set bin-links false
 
 # install the tsd utility for installing
 # Visual Studio Code typings files
