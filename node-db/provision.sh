@@ -44,7 +44,7 @@ apt-get update
 apt-get install -y redis-server
 
 # set the loglevel for npm to show errors only
-npm config set loglevel error
+npm config set loglevel error -g
 
 # install the tsd utility for installing
 # Visual Studio Code typings files
