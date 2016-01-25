@@ -41,10 +41,9 @@ conn.queryAsync('insert into stories (url) values (?)', ['http://google.com'])
      .then(function(results) {
          console.log('%d rows affected', results.affectedRows);
      })
-     .then(function() {
-         conn.end();
-     })
      .catch(function(err) {
          console.error(err);
+     })
+    .then(function() {
          conn.end();
      });
