@@ -1,6 +1,8 @@
 'use strict';
 
 var express = require('express');
+var request = require('request');
+var cheerio = require('cheerio');
 
 module.exports.Router = function(Story) {
     var router = express.Router();
@@ -18,13 +20,33 @@ module.exports.Router = function(Story) {
         //insert a new story into the database
         //and return the data with default values
         //applied
-        res.json({}); 
+        request.get(req.body.url, function(err, response, body) {
+            if (err) {
+                req.body.title = req.body.url;
+            }
+            else {
+                var $ = cheerio.load(body);
+                req.body.title = $('head title').text();                
+            }
+            
+            Story.insert(req.body)
+                .then(function(row) {
+                    res.json(row);
+                })
+                .catch(next);            
+        });
+        
+         
     });
     
     router.post('/stories/:id/votes', function(req, res, next) {
         //upvote the story and return the
         //full story with current number of votes
-        res.json({}); 
+        Story.upVote(req.params.id)
+            .then(function(row) {
+                res.json(row);
+            })
+            .catch(next);
     });
     
     return router;
