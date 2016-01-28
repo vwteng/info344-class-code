@@ -33,12 +33,21 @@ module.exports.Router = function(stories) {
         
         //fetch the HTML for the new URL
         var inTitleElem = false;
+        //create a new WriteableStream parser
+        //this takes a set of callbacks that are called when the parser
+        //encounters an open tag, text, and a close tag
         var parser = new htmlparser.WritableStream({
+            //called whenever the parser encounters an open tag
             onopentag: function(name, attrs) {
+                //detect if the tag is named 'title' 
                 inTitleElem = ('title' === name);
             },
             ontext: function(text) {
+                //if we are in the title element
                 if (inTitleElem) {
+                    //ontext may be called several times, so append
+                    //the text value to req.body.title, or set 
+                    //req.body.title if it doesn't exist yet
                     if (req.body.title) {
                         req.body.title += text;
                     }
@@ -48,10 +57,13 @@ module.exports.Router = function(stories) {
                 }
             },
             onclosetag: function() {
+                //once the tag closes we are no longer
+                //in the title element by definition
                 inTitleElem = false;
             }
         }, {decodeEntities: true});
         
+        //get the URL and pipe it into the parser
         request.get(req.body.url, {followRedirect: false})
             .on('error', function() {
                 console.error('error requesting page, using url for title');
