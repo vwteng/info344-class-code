@@ -32,7 +32,7 @@ var stories = {
         // - url must be a valid URL
         
         var sql = 'insert into stories (url,title) values (?,?)';
-        var params = [story.url, story.title];
+        var params = [story.url, (story.title || story.url)];
         return connPool.queryAsync(sql, params)
             .then(function(results) {
                 //since we have default values applied by the database

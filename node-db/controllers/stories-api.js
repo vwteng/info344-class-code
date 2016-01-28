@@ -1,8 +1,8 @@
 'use strict';
 
-var express = require('express');   //sub-routers 
-var request = require('request');   //request URLs
-var cheerio = require('cheerio');   //parse HTML
+var express = require('express');           //sub-routers 
+var request = require('request');           //request URLs
+var htmlparser = require('htmlparser2');    //parse html
 
 module.exports.Router = function(stories) {
     //create a new Express Router
@@ -32,31 +32,42 @@ module.exports.Router = function(stories) {
         //TODO: validate that req.body.url exists and is a valid URL
         
         //fetch the HTML for the new URL
-        request.get(req.body.url, function(err, response, body) {
-            if (err) {
-                //if there is a problem, just use the URL as the title
-                //and continue--articles behind a paywall or login
-                //are inaccessible to us
-                req.body.title = req.body.url;
+        var inTitleElem = false;
+        var parser = new htmlparser.WritableStream({
+            onopentag: function(name, attrs) {
+                inTitleElem = ('title' === name);
+            },
+            ontext: function(text) {
+                if (inTitleElem) {
+                    if (req.body.title) {
+                        req.body.title += text;
+                    }
+                    else {
+                        req.body.title = text;
+                    }
+                }
+            },
+            onclosetag: function() {
+                inTitleElem = false;
             }
-            else {
-                //parse the HTML using cheerio
-                //same API as jQuery once it's parsed
-                var $ = cheerio.load(body);
-                //grab the text of the title element within the head element
-                req.body.title = $('head title').text();                
-            }
-            
-            //insert the new story
-            stories.insert(req.body)
-                .then(function(row) {
-                    //echo back the story with all default values applied
-                    res.json(row);
-                })
-                .catch(next); //forwards the error to Express
-        });
+        }, {decodeEntities: true});
         
-         
+        request.get(req.body.url, {followRedirect: false})
+            .on('error', function() {
+                console.error('error requesting page, using url for title');
+                req.body.title = req.body.url;
+            })
+            .on('end', function() {
+                //insert the new story
+                stories.insert(req.body)
+                    .then(function(row) {
+                        //echo back the story with all default values applied
+                        res.json(row);
+                    })
+                    .catch(next); //forwards the error to Express                                
+            })
+            .pipe(parser);
+            
     });
     
     //POST /stories/1234/votes
