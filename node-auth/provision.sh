@@ -15,9 +15,6 @@ apt-get update
 # (gets us add-apt-repository command)
 apt-get install -y software-properties-common
 
-# needed for argon2 library
-apt-get install -y git
-
 # install Node.js v5.x
 curl -sL https://deb.nodesource.com/setup_5.x | bash -
 apt-get install -y nodejs
