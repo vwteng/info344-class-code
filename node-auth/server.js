@@ -59,7 +59,7 @@ app.use(express.static(__dirname + '/static/public'));
 
 app.use(function(req, res, next) {
     //req.isAuthenticated()
-     
+    next();
 });
 
 app.use(express.static(__dirname + '/static/secure'));
