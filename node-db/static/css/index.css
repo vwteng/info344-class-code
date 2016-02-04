@@ -28,3 +28,11 @@ header h1 {
 .stories a:focus {
     text-decoration: none;
 }
+<<<<<<< HEAD
+=======
+
+.error-message {
+    color: #ff6600;
+    font-size: 0.8em;
+}
+>>>>>>> d00ee974a1f174ecc82d6fbb7204af3d51732448

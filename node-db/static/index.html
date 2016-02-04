@@ -22,14 +22,28 @@
     </header>
     
     <section class="stories">
+<<<<<<< HEAD
         <form name="newStoryForm" ng-submit="saveStory()" novalidate>
             <div class="form-group">
                 <input type="url"
+=======
+        <form name="newStoryForm" ng-submit="newStoryForm.$valid && saveStory()" novalidate>
+            <div class="form-group">
+                <input type="url"
+                    name="urlInp"
+>>>>>>> d00ee974a1f174ecc82d6fbb7204af3d51732448
                     class="form-control"
                     ng-model="newStory.url"
                     placeholder="enter a URL"
                     required
+<<<<<<< HEAD
                 >            
+=======
+                />
+                <p class="error-message" ng-if="newStoryForm.urlInp.$error.url">
+                    Please enter the full URL (http://... or https://...)
+                </p>  
+>>>>>>> d00ee974a1f174ecc82d6fbb7204af3d51732448
             </div>
         </form>
         
