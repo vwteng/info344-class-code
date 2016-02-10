@@ -15,6 +15,9 @@ apt-get update
 # (gets us add-apt-repository command)
 apt-get install -y software-properties-common
 
+# install git (needed for PM2)
+apt-get install -y git
+
 # install Node.js v5.x
 curl -sL https://deb.nodesource.com/setup_5.x | bash -
 apt-get install -y nodejs
@@ -46,6 +49,9 @@ npm install -g tsd
 
 # install the Mocha.js automated testing harness
 npm install -g mocha
+
+# install PM2 to start Node servers in the background
+npm install -g pm2
 
 # create the database schema
 mysql -u root < /vagrant/sql/schema.sql
