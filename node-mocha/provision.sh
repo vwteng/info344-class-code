@@ -45,7 +45,7 @@ npm config set loglevel error -g
 npm install -g tsd
 
 # install the Mocha.js automated testing harness
-npm instal -g mocha
+npm install -g mocha
 
 # create the database schema
 mysql -u root < /vagrant/sql/schema.sql
