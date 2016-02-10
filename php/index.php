@@ -5,7 +5,10 @@ if (strlen($name) == 0) {
     $name = 'World';
 }
 ?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,5 +18,9 @@ if (strlen($name) == 0) {
 </head>
 <body>
     <h1>Hello <?= htmlentities($name) ?>!</h1>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
 </body>
 </html>
