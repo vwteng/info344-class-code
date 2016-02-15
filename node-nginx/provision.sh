@@ -33,15 +33,17 @@ apt-get install -y build-essential
 # set the loglevel for npm to show errors only
 npm config set loglevel error -g
 
-# install the tsd utility for installing
+# install the typings utility for installing
 # Visual Studio Code typings files
 # gives statement completion and parameter hinting
 # not needed for runtime or production servers
-npm install -g tsd
+npm install -g typings
 
 # install PM2 to start Node servers in the background
 npm install -g pm2
 
 # add our website to the NGINX set of sites-enabled
-ln -s /vagrant/website /etc/nginx/sites-enabled/website
+# and remove the default configuration that is there
+ln -s /vagrant/nginx/website /etc/nginx/sites-enabled/website
+rm /etc/nginx/sites-enabled/default
 service nginx restart
