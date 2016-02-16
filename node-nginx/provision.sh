@@ -42,8 +42,8 @@ npm install -g typings
 # install PM2 to start Node servers in the background
 npm install -g pm2
 
-# add our website to the NGINX set of sites-enabled
-# and remove the default configuration that is there
-ln -s /vagrant/nginx/website /etc/nginx/sites-enabled/website
+# remove the default configuration and replace it
+# with our configuration file
 rm /etc/nginx/sites-enabled/default
+ln -s /vagrant/nginx/website /etc/nginx/sites-enabled/default
 service nginx restart

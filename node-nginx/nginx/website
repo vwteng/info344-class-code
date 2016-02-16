@@ -1,16 +1,8 @@
-upstream node_app {
-    server 127.0.0.1:9000;
-}
-
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
     location / {
         root /vagrant/static;
-    }
-    
-    location /api {
-        proxy_pass http://node_app;
-    }
+    }    
 }
