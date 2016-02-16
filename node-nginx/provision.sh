@@ -42,8 +42,11 @@ npm install -g typings
 # install PM2 to start Node servers in the background
 npm install -g pm2
 
-# remove the default NGINX configuration and replace
+# rename the default NGINX configuration and replace
 # it with the one in our nginx directory
-rm /etc/nginx/sites-enabled/default
-ln -s /vagrant/nginx/default /etc/nginx/sites-enabled/default
+# we have to copy it rather than symlink it because
+# nginx reads this at system boot, but the /vagrant
+# directory doesn't get mounted until after that
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old 
+cp /vagrant/nginx/default /etc/nginx/sites-available/default
 service nginx restart
