@@ -6,6 +6,12 @@ var port = 9000;
 
 var app = express();
 
+//serve static files from the /static subdirectory
+app.use(express.static(__dirname + '/static'));
+
+//API route to get the bcrypt hash for a password
+//this is just to illustrate a compute-intensive
+//operation so that you can see the benefits of scaling
 app.get('/api/bcrypt', function(req, res) {
     var pwd = req.query.p;
     if (!pwd) {
@@ -23,12 +29,11 @@ app.get('/api/bcrypt', function(req, res) {
     //start something that will never end
     rounds = Math.min(rounds, 15);
     
-    bcrypt.hash(pwd, rounds, function(err, hash) {
-        res.json({
-            hash: hash,
-            rounds: rounds
-        });
-    });        
+    res.json({
+        hash: bcrypt.hashSync(pwd, rounds),
+        rounds: rounds
+    });
+    
 });
 
 app.listen(port, function() {
