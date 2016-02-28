@@ -68,3 +68,5 @@ import (
     "github.com/dustin/go-humanize"
 )
 ```
+
+And use the `humanize.Comma()` function to format numbers with commas as the thousands separator. Note that this function takes an `int64` so if you use a different integer type in your struct, you will need to convert it while passing it to this function.
