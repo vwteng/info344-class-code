@@ -40,13 +40,13 @@ If you did everything correctly, you should see a long list of zip codes printed
 
 Now that you can parse and process the CSV file as a stream, do some tabulation as you process the records. Define a [struct](https://gobyexample.com/structs) that you can use to keep track of the following as you process the records:
 
-- Total number of records
-- Number of records per each distinct `type` value (slice index `1`)
-- The zip code with the highest estimated population (slice index `14`)
+- Total number of records.
+- Number of records per each distinct `type` value (slice index `1`). This is like a `GROUP BY` query in SQL, where you are calculating how many records there are per distinct `type` value.
+- The zip code with the highest estimated population (slice index `14`).
 
 Add logic inside your loop to adjust these values as you process each record. 
 
-After your loop ends, print a summary of these values. For the counts per type, you should output those types in [sorted order](https://golang.org/pkg/sort/).
+After your loop ends, print a summary of these values. For the counts per type, you should output those types in [sorted order](http://stackoverflow.com/questions/2038508/easy-way-to-get-the-keys-in-a-map-in-alphabetical-order).
 
 Remember that the slice you get back when you read a record is a slice of strings. To do mathematical comparisons on values like the population, you will need to [convert those strings into integers](https://golang.org/pkg/strconv/).
 
