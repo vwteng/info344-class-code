@@ -7,6 +7,8 @@ node_modules
 /secret/.template
 /secret/.md
 
+/lab5-godata/zip_code_database.csv
+
 # ignore all files in any directory named `secret`
 **/secret/*
 
@@ -19,3 +21,6 @@ node_modules
 
 # and the VSCode typings directory
 typings
+
+# ignore .key files
+*.key
